@@ -1,11 +1,15 @@
-function initMap(){
+let map;
+let center;
 
-    const centerMap = { lat:45.4978489, lng: -73.569564}
+async function initMap(){
+    const { Map } = await google.maps.importLibrary("maps");
+    center = { lat:45.4978489, lng: -73.569564};
 
-    const mapOptions = {
+    map = new Map(document.getElementById("map"), {
         center: centerMap,
-        zoom: 15,
+        zoom: 13,
         disableDefaultUI: true,
+        mapId: "CONU",
         styles: [
             {
                 "featureType": "administrative",
@@ -68,7 +72,62 @@ function initMap(){
                 ]
             }
         ]
-    }
+    });
+}
 
-    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps");
+
+  center = { lat:45.4978489, lng: -73.569564};
+  map = new Map(document.getElementById("map"), {
+    center: center,
+    zoom: 11,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  fetch("https://gbfs.velobixi.com/gbfs/en/station_status.json")
+
+//   findPlaces();
+}
+
+async function findPlaces() {
+  const { Place } = await google.maps.importLibrary("places");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  const request = {
+    textQuery: "bixi stations",
+    fields: ["displayName", "location"],
+    includedType: "",
+    locationBias: { lat:45.4978489, lng: -73.569564 },
+    isOpenNow: true,
+    language: "en-US",
+    maxResultCount: 8,
+    minRating: 3.2,
+    region: "us",
+    useStrictTypeFiltering: false,
+  };
+  //@ts-ignore
+  const { places } = await Place.searchByText(request);
+
+  if (places.length) {
+    console.log(places);
+
+    const { LatLngBounds } = await google.maps.importLibrary("core");
+    const bounds = new LatLngBounds();
+
+    // Loop through and get all the results.
+    places.forEach((place) => {
+      const markerView = new AdvancedMarkerElement({
+        map,
+        position: place.location,
+        title: place.displayName,
+      });
+
+      bounds.extend(place.location);
+      console.log(place);
+    });
+    map.fitBounds(bounds);
+  } else {
+    console.log("No results");
+  }
 }
