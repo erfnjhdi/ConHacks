@@ -1,0 +1,59 @@
+/* Existing styles adapted for overall layout */
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Ensures navbar and content are laid out vertically */
+  min-height: 100vh;
+  background-color: #282c34; /* Consistent background color */
+}
+
+/* Styling for navigation */
+nav {
+  width: 100%;
+  background-color: #20232a; /* Slightly different shade for navbar */
+  padding: 0.5rem 0; /* Add some padding around nav items */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Center nav items horizontally */
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+/* Adjusting App-header for content below nav */
+.App-header {
+  flex: 1; /* Takes remaining space */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* Map container specific styles */
+.Map-container {
+  width: 100%;
+  height: 50vh; /* Adjust height as necessary */
+}
+
+/* Keyframes and animations are unchanged */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
