@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bixi</title>
+    <title>Bixi Station Finder</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file -->
 </head>
 <body>
-    <nav>
-        <div>bixi</div>
-        <div>
-            find a station
-            <input type="text" placeholder="enter a station name, street name or address">
-        </div>        
-    </nav>
-    <div>
-        <img src="assets/images/image.png" alt="map">
-    </div>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Bixi</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Enter a station name, street name, or address" aria-label="Search stations">
+            </div>
+        </nav>
+    </header>
+    <main class="main-content">
+        <img src="assets/images/map.png" alt="Map showing Bixi stations" class="station-map">
+    </main>
 </body>
 </html>
