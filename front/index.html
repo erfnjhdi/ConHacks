@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bixi</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <nav>
@@ -13,8 +15,9 @@
             <input type="text" placeholder="enter a station name, street name or address">
         </div>        
     </nav>
-    <div>
-        <img src="assets/images/image.png" alt="map">
+    <div id="map">
     </div>
 </body>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNaTXAE-rkI4BQu3s950k2o36fgL6-jSk&callback=initMap"></script>
+<script src="main.js"></script>
 </html>
