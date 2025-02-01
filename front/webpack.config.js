@@ -20,12 +20,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html' // Path to your HTML file
+      template: './index.html' // Points to your existing index.html file
     })
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist'), // Updated from contentBase to static
+    },
     compress: true,
-    port: 9000
+    port: 9000,
+    open: true // Automatically opens your browser to the dev server URL
   }
 };
