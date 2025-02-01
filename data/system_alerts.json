@@ -1,0 +1,74 @@
+{
+  "last_updated": 1738435925,
+  "ttl": 10,
+  "data": {
+    "alerts": [
+      {
+        "alert_id": "2",
+        "type": "SYSTEM_CLOSURE",
+        "times": [
+          {
+            "start": 1695146400,
+            "end": 1695700740
+          }
+        ],
+        "url": "https://bixi.com/en/ami-bixi/",
+        "summary": "New Amis BIXI Reward",
+        "description": "Help us balance the bikes in the network and win free electric rides!",
+        "last_updated": 1695139568
+      },
+      {
+        "alert_id": "5",
+        "type": "SYSTEM_CLOSURE",
+        "times": [
+          {
+            "start": 1706223960,
+            "end": 1706310000
+          }
+        ],
+        "summary": "Information",
+        "description": "The icy conditions will make travel more difficult. Caution and vigilance are required during outings for all year-round cyclists. The BIXI network remains open.",
+        "last_updated": 1706223871
+      },
+      {
+        "alert_id": "6",
+        "type": "SYSTEM_CLOSURE",
+        "times": [
+          {
+            "start": 1709068500,
+            "end": 1709269140
+          }
+        ],
+        "summary": "Information",
+        "description": "Please note that new rates will come into effect on Friday, March 1st. Check our website for full details.",
+        "last_updated": 1709068401
+      },
+      {
+        "alert_id": "10",
+        "type": "SYSTEM_CLOSURE",
+        "times": [
+          {
+            "start": 1712408400,
+            "end": 1712581200
+          }
+        ],
+        "summary": "Early network opening",
+        "description": "75% of the network is available this weekend! Grab your seasonal membership and enjoy the nice weather on your BIXI!",
+        "last_updated": 1712347600
+      },
+      {
+        "alert_id": "15",
+        "type": "SYSTEM_CLOSURE",
+        "times": [
+          {
+            "start": 1721350680,
+            "end": 1721404800
+          }
+        ],
+        "summary": "Network Info",
+        "description": "The service is restored to all BIXI stations.",
+        "last_updated": 1721350842
+      }
+    ]
+  }
+}
