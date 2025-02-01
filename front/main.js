@@ -86,10 +86,32 @@ async function initMap() {
     mapId: "DEMO_MAP_ID",
   });
 
-  fetch("https://gbfs.velobixi.com/gbfs/en/station_status.json")
+  
 
 //   findPlaces();
 }
+
+async function getLocations(){
+    try{
+
+    }catch(error){
+        console.error(error);
+    }
+}
+
+// station info
+fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json")
+    .then(response => response.json())
+    .then(data => console.log(data.data.stations))
+    .catch(error => console.error(error));
+
+
+
+// station status
+fetch("https://gbfs.velobixi.com/gbfs/en/station_status.json")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
 
 async function findPlaces() {
   const { Place } = await google.maps.importLibrary("places");
