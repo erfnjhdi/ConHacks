@@ -129,7 +129,7 @@ async function getLocations(){
         
         // let i = 0; i <= 250; i++
 
-        let time = new java.util.Date((long)timeStamp*1000);
+        let time = new Date(data.last_updated*1000);
 
         console.log(time);
 
