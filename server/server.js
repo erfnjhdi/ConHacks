@@ -1,15 +1,14 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, '../front')));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../front', 'index.html'));
+// API Route Example
+app.get('/api/test', (req, res) => {
+    res.json({ message: "Server is running!" });
 });
 
+// Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
