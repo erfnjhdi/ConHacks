@@ -97,7 +97,7 @@ async function initMap() {
       function createInfoWindow(){
         const infoWindowContent = `
             <div class="feh-content">
-                <h3>${markers[i]['num_bikes_available']}/${markers[i]['capacity']}</h3>
+                <h3>${markers[i]['num_bikes_available']}/${markers[i]['capacity']} available</h3>
                 <address>
                     <p>${markers[i]['address']}</p>
                 </address>
