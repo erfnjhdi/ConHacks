@@ -46,3 +46,20 @@ input[type=text]{
     font-size: 20px;
     font-style: italic;
 }
+
+.redirect-button {
+    padding: 10px 20px;
+    background-color: red; /* or any other color you prefer */
+    color: white; /* text color */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 20px; /* same as #search div */
+    font-weight: 500; /* same as #search div */
+    font-style: italic; /* if you want it to match exactly */
+    margin-left: auto; /* keeps it aligned to the right */
+    transition: background-color 0.3s;
+}
+
+.redirect-button:hover {
+    background-color: #c0392b;
+}
