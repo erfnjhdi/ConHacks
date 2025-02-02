@@ -1,118 +1,120 @@
 let map;
 let center;
+var markers = [];
 
-async function initMap(){
-    const { Map } = await google.maps.importLibrary("maps");
-    center = { lat:45.4978489, lng: -73.569564};
-
-    map = new Map(document.getElementById("map"), {
-        center: centerMap,
-        zoom: 13,
-        disableDefaultUI: true,
-        mapId: "CONU",
-        styles: [
-            {
-                "featureType": "administrative",
-                "elementType": "labels.text.fill"
-            },
-            {
-                "featureType": "landscape",
-                "elementType": "all"
-            },
-            {
-                "featureType": "poi",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "all"
-            },
-            {
-                "featureType": "road.highway",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "simplified"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.arterial",
-                "elementType": "labels.icon",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "transit",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "color": "#80dfff"
-                    },
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            }
-        ]
-    });
-}
 
 
 async function initMap() {
+
   const { Map } = await google.maps.importLibrary("maps");
 
   center = { lat:45.4978489, lng: -73.569564};
   map = new Map(document.getElementById("map"), {
     center: center,
-    zoom: 11,
-    mapId: "DEMO_MAP_ID",
+    zoom: 13,
+    styles: [
+        {
+            "featureType": "administrative",
+            "elementType": "labels.text.fill"
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "all"
+        },
+        {
+            "featureType": "poi",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "all"
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "color": "#80dfff"
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        }
+    ]
   });
 
+//   markers.push({lat:45.51049728732744, lng: -73.56678128242493});
+    
+  getLocations();
+
+  for(let i = 0; i < markers.length; i++){
+    const marker = new google.maps.Marker({
+        position: {lat:markers[0]['lat'], lng: markers[0]['lng']},
+        map:map
+      });
+
+  }
   
 
 //   findPlaces();
 }
 
+
+
 async function getLocations(){
     try{
+        const response = await fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json");
+        if(!response.ok){
+            throw new Error("could not fetch resource");
+        }
 
+        const data = await response.json();
+        
+        
+            markers.push({lat:data.data.stations[0].lat, lng:data.data.stations[0].lon});
+            console.log(markers.length);
+        
+
+        console.log(data.data.stations[0]);
     }catch(error){
         console.error(error);
     }
 }
 
-// station info
-fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json")
-    .then(response => response.json())
-    .then(data => console.log(data.data.stations))
-    .catch(error => console.error(error));
-
-
-
-// station status
-fetch("https://gbfs.velobixi.com/gbfs/en/station_status.json")
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
+//  
 async function findPlaces() {
   const { Place } = await google.maps.importLibrary("places");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
