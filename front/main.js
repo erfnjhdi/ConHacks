@@ -5,7 +5,6 @@ var markers = [];
 
 
 
-
 async function initMap() {
 
   const { Map } = await google.maps.importLibrary("maps");
@@ -127,12 +126,14 @@ async function getLocations(){
         }
 
         const data = await response.json();
+
             // let i = 0; i <= 250; i++
             for(var station of data.data.stations){
                 markers.push({lat:station.lat, lng:station.lon, locationName: "swag"});
             }
             
         
+
     }catch(error){
         console.error(error);
     }
