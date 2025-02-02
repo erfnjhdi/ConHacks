@@ -97,9 +97,9 @@ async function initMap() {
       function createInfoWindow(){
         const infoWindowContent = `
             <div class="feh-content">
-                <h3>${markers[i]['locationName']}</h3>
+                <h3>${markers[i]['num_bikes_available']}/${markers[i]['capacity']} available</h3>
                 <address>
-                    <p>Address</p>
+                    <p>${markers[i]['address']}</p>
                 </address>
             </div>
         `;
@@ -120,17 +120,36 @@ async function initMap() {
 
 async function getLocations(){
     try{
-        const response = await fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json");
-        if(!response.ok){
+        const response_info = await fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json");
+        const response_status = await fetch("https://gbfs.velobixi.com/gbfs/en/station_status.json");
+        if(!response_info.ok && !response_status.ok){
             throw new Error("could not fetch resource");
         }
 
-        const data = await response.json();
+        const data_info = await response_info.json();
+        const data_status = await response_status.json();
+        
+        // let i = 0; i <= 250; i++
 
-            // let i = 0; i <= 250; i++
-            for(var station of data.data.stations){
-                markers.push({lat:station.lat, lng:station.lon, locationName: "swag"});
+        let time = new Date(data_info.last_updated*1000);
+        console.log(time);
+
+
+        for(var station_data of data_info.data.stations){
+            for(var station_status of data_status.data.stations){
+                if (station_data.station_id == station_status.station_id){
+                    markers.push({
+                        lat:station_data.lat, 
+                        lng:station_data.lon, 
+                        num_bikes_available: station_status.num_bikes_available, 
+                        capacity: station_data.capacity,
+                        address: station_data.name
+                    });
+                }
+                
             }
+            
+        }
             
         
 
