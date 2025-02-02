@@ -126,11 +126,16 @@ async function getLocations(){
         }
 
         const data = await response.json();
+        
+        // let i = 0; i <= 250; i++
 
-            // let i = 0; i <= 250; i++
-            for(var station of data.data.stations){
-                markers.push({lat:station.lat, lng:station.lon, locationName: "swag"});
-            }
+        let time = new java.util.Date((long)timeStamp*1000);
+
+        console.log(time);
+
+        for(var station of data.data.stations){
+            markers.push({lat:station.lat, lng:station.lon, station_id: station.station_id});
+        }
             
         
 
