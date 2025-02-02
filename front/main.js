@@ -2,9 +2,6 @@ let map;
 let center;
 var markers = [];
 
-
-
-
 async function initMap() {
 
   const { Map } = await google.maps.importLibrary("maps");
@@ -76,8 +73,13 @@ async function initMap() {
         }
     ]
   });
-
-
+  
+  document.querySelector('input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        findPlaces();
+    }
+});
+  
 
 //   markers.push({lat:45.51049728732744, lng: -73.56678128242493});
     
@@ -112,8 +114,46 @@ async function initMap() {
       createInfoWindow();
 
   }
-  
 
+
+  async function findPlaces() {
+    const { Place } = await google.maps.importLibrary("places");
+    const{ Marker } = await google.maps.importLibrary("marker");
+    let input = document.getElementById('input').value;
+    console.log(input);
+    const request = {
+        textQuery: input,
+    fields: ["displayName", "location", "businessStatus"],
+    includedType: "restaurant",
+    locationBias: { lat: 37.4161493, lng: -122.0812166 },
+    isOpenNow: true,
+    language: "en-US",
+    maxResultCount: 8,
+    minRating: 3.2,
+    region: "us",
+    useStrictTypeFiltering: false,
+    };
+
+    const { places } = await Place.searchByText(request);
+
+    if(places.length) {
+        const { LatLngBounds } = await google.maps.importLibrary("core");
+        const bounds = new LatLngBounds();
+
+        places.forEach((place) => {
+            const markerView = new Marker({
+                map,
+                position: place.location,
+                title: place.displayName,
+            });
+
+            bounds.extend(place.location);
+        });
+        map.fitBounds(bounds);
+    }else{
+        console.log("no results");
+    }
+  }
 }
 
 
@@ -159,7 +199,6 @@ async function getLocations(){
 }
 
 document.getElementById("toggle_mode").addEventListener('click', function (){
-    console.log('hey');
     map.styles = [
         {
             "featureType": "all",
