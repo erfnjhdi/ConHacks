@@ -120,20 +120,19 @@ async function initMap() {
 
 async function getLocations(){
     try{
-        const response = await fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json");
-        if(!response.ok){
+        const response_info = await fetch("https://gbfs.velobixi.com/gbfs/en/station_information.json");
+        if(!response_info.ok){
             throw new Error("could not fetch resource");
         }
 
-        const data = await response.json();
+        const data_info = await response_info.json();
         
         // let i = 0; i <= 250; i++
 
-        let time = new Date(data.last_updated*1000);
-
+        let time = new Date(data_info.last_updated*1000);
         console.log(time);
 
-        for(var station of data.data.stations){
+        for(var station of data_info.data.stations){
             markers.push({lat:station.lat, lng:station.lon, station_id: station.station_id});
         }
             
